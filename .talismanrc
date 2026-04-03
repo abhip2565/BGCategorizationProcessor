@@ -1,0 +1,14 @@
+fileignoreconfig:
+- filename: Tests/BGCategorizationProcessorTests/BGCategorizationProcessorIntegrationTests.swift
+  checksum: fff61f21a24da2ef2f8b2a12ce1b3c02bd970d4cba851f268f954065465c4c8e
+- filename: Sources/BGCategorizationProcessor/Engine/CategorizationEngine.swift
+  checksum: 895938cfa1812bddbc6ce8f25d416e4e9ac89973647ded20cdbe17f88a36ba31
+- filename: Sources/BGCategorizationProcessor/Storage/DatabaseConnection.swift
+  checksum: 1a2df4dc19ff2dfe51d9d9ec8b8b320d476f6127faad53162ba359489edfc1e6
+- filename: Sources/BGCategorizationProcessor/Storage/CategorizationDatabase.swift
+  checksum: 5ba6f3fc722098a84436e0d6c1210b6e84488a53ac5872a09132915d472787e6
+- filename: Tests/BGCategorizationProcessorTests/Mocks/MockDatabaseConnection.swift
+  checksum: 85a9e42368cc8e7bda8c8ba56fbdfe3fa14a5784420f9041efde37425c6dd628
+- filename: Sources/BGCategorizationProcessorCoreML/Resources/MiniLM/MiniLMEmbedding.mlmodelc/model.mil
+  checksum: 62847518961a5af81221eed9d9be7158fe2b989c0f7685b153d264607f9dfafd
+version: ""

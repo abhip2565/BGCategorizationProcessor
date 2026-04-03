@@ -1,0 +1,39 @@
+{
+  "positivePairs": [
+    {
+      "left": "invoice tax payment salary expense",
+      "right": "billing payroll reimbursement finance"
+    },
+    {
+      "left": "doctor hospital appointment clinic",
+      "right": "prescription nurse medical treatment"
+    },
+    {
+      "left": "soccer stadium team coach",
+      "right": "football player match league"
+    }
+  ],
+  "negativePairs": [
+    {
+      "left": "invoice tax payment salary expense",
+      "right": "mountain hiking trail weather"
+    },
+    {
+      "left": "doctor hospital appointment clinic",
+      "right": "soccer stadium team coach"
+    },
+    {
+      "left": "football player match league",
+      "right": "billing payroll reimbursement finance"
+    }
+  ],
+  "candidateThresholds": [
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45
+  ]
+}

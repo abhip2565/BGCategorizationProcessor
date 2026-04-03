@@ -1,0 +1,41 @@
+name: BGCategorizationProcessorSampleApp
+options:
+  minimumXcodeGenVersion: 2.38.0
+configs:
+  Debug: debug
+  Release: release
+packages:
+  BGCategorizationProcessor:
+    url: https://github.com/abhip2565/BGCategorizationProcessor.git
+    branch: main
+targets:
+  SampleApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: Sources
+    settings:
+      base:
+        INFOPLIST_FILE: Config/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.abhip2565.BGCategorizationProcessor.SampleApp
+        PRODUCT_NAME: SampleApp
+        SWIFT_VERSION: 6.0
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        GENERATE_INFOPLIST_FILE: NO
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - package: BGCategorizationProcessor
+        product: BGCategorizationProcessor
+      - package: BGCategorizationProcessor
+        product: BGCategorizationProcessorCoreML
+schemes:
+  SampleApp:
+    build:
+      targets:
+        SampleApp: all
+    run:
+      config: Debug
+    test:
+      config: Debug

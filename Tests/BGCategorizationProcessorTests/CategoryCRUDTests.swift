@@ -106,6 +106,29 @@ final class CategoryCRUDTests: XCTestCase {
         XCTAssertEqual(Set(categories.map(\.id)), Set(["finance", "health"]))
     }
 
+    func testCategoriesPersistAcrossProcessorReinitialization() async throws {
+        let vectors: [String: [Float]] = [
+            "Finance": [1, 0, 0, 0],
+            "invoice": [1, 0, 0, 0],
+            "Travel": [0, 1, 0, 0],
+            "boarding pass": [0, 1, 0, 0]
+        ]
+
+        let firstProcessor = try makeProcessor(provider: MockEmbeddingProvider(vectors: vectors))
+        try await firstProcessor.resetCategories(to: [
+            CategoryDefinition(id: "finance", label: "Finance", descriptors: ["invoice"]),
+            CategoryDefinition(id: "travel", label: "Travel", descriptors: ["boarding pass"])
+        ])
+
+        let secondProcessor = try makeProcessor(provider: MockEmbeddingProvider(vectors: vectors))
+        let persisted = try await secondProcessor.currentCategories()
+
+        XCTAssertEqual(
+            persisted.sorted { $0.id < $1.id }.map(\.id),
+            ["finance", "travel"]
+        )
+    }
+
     func testLoadCentroidsReturnsMap() async throws {
         let database = try CategorizationDatabase(path: databasePath)
         try await database.upsertCategory(

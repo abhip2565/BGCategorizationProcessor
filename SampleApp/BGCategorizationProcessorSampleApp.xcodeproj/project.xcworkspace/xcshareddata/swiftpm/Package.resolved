@@ -1,0 +1,15 @@
+{
+  "originHash" : "6ed90ad079c8ad95009af2322533a7d2b09f340a4fa880aa283ee6e4b3a82318",
+  "pins" : [
+    {
+      "identity" : "bgcategorizationprocessor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/abhip2565/BGCategorizationProcessor.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f5a5454fd47583bc9c2df51dab0502f1f0a5cb8e"
+      }
+    }
+  ],
+  "version" : 3
+}

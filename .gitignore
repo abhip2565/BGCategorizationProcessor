@@ -5,5 +5,7 @@
 Artifacts/
 DerivedData/
 *.xcodeproj
+!SampleApp/BGCategorizationProcessorSampleApp.xcodeproj
+!SampleApp/BGCategorizationProcessorSampleApp.xcodeproj/**
 xcuserdata/
 .DS_Store

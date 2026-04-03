@@ -11,4 +11,14 @@ fileignoreconfig:
   checksum: 85a9e42368cc8e7bda8c8ba56fbdfe3fa14a5784420f9041efde37425c6dd628
 - filename: Sources/BGCategorizationProcessorCoreML/Resources/MiniLM/MiniLMEmbedding.mlmodelc/model.mil
   checksum: 62847518961a5af81221eed9d9be7158fe2b989c0f7685b153d264607f9dfafd
+- filename: SampleApp/BGCategorizationProcessorSampleApp.xcodeproj/project.pbxproj
+  checksum: 0b35ad545fb3c5c77c6dc77b3636dac042237896e9818cff09c40689c877c25a
+- filename: SampleApp/BGCategorizationProcessorSampleApp.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+  checksum: caef3939348023be02171c6e016eed0a4a82b14a08a40c6f66f95d3413d3dca3
+- filename: SampleApp/BGCategorizationProcessorSampleApp.xcodeproj/xcshareddata/xcschemes/SampleApp.xcscheme
+  checksum: a0cfcb7ae33d855c1726469c60f581210d88d5019a02672f70927e8625d411b5
+- filename: SampleApp/Config/Info.plist
+  checksum: 013f159fe77258865077fe56a98ea74a8e564cd7b9109e976fcc7738cf75d26e
+- filename: SampleApp/Sources/App/SampleAppModel.swift
+  checksum: 17afb9bd86f34412d8a9dd556e3d4e44bd6ce4c39d22ff334994fbd626a724ae
 version: ""

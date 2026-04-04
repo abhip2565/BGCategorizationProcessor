@@ -191,12 +191,6 @@ public final class BGCategorizationProcessor: Sendable {
             return false
         }
 
-        defer {
-            Task {
-                await self.processingGate.end()
-            }
-        }
-
         do {
             _ = try await database.purgeExpiredResults(before: resultCutoffDate())
             let centroids = try await database.loadCentroids()
@@ -206,11 +200,13 @@ public final class BGCategorizationProcessor: Sendable {
             let jobs = try await queue.dequeue(limit: batchSize)
 
             guard !jobs.isEmpty else {
+                await processingGate.end()
                 return true
             }
 
             if centroids.isEmpty {
                 try await processJobsWithoutCategories(jobs)
+                await processingGate.end()
                 return true
             }
 
@@ -220,9 +216,12 @@ public final class BGCategorizationProcessor: Sendable {
             case .background:
                 try await processSequential(jobs: jobs, centroids: centroids)
             }
+            await processingGate.end()
         } catch let error as CategorizationError {
+            await processingGate.end()
             throw error
         } catch {
+            await processingGate.end()
             throw CategorizationError.databaseError(underlying: error)
         }
         return true

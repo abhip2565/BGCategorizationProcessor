@@ -25,4 +25,8 @@ fileignoreconfig:
   checksum: 45c3f4187ca25ef14d81e97ec67911278c06dee438cb1e1abbf28f4bf146ad1f
 - filename: SampleApp/Sources/Support/SampleAppConfiguration.swift
   checksum: 8f17db0170e8ed9334ba7d43ec1fdb86dc10477d41b022ff07ecf91627748fc6
+- filename: README.md
+  checksum: 89bd9f58f10b54a084628c766240a11d5f9d776bee752b8e465118275e8029f7
+- filename: SampleApp/README.md
+  checksum: b23a7f3d9910140e78d970b955aec3a370544fc6bbc6505370a551528eb17988
 version: ""

@@ -380,7 +380,7 @@ public final class BGCategorizationProcessor: Sendable {
             case .background:
                 await scheduleBackgroundProcessingIfNeeded()
             case .backgroundTask:
-                await automaticProcessingDriver.cancel()
+                break
             }
         }
     }

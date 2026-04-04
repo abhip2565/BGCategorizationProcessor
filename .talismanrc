@@ -24,5 +24,5 @@ fileignoreconfig:
 - filename: Sources/BGCategorizationProcessor/BGTaskCoordinator.swift
   checksum: 45c3f4187ca25ef14d81e97ec67911278c06dee438cb1e1abbf28f4bf146ad1f
 - filename: SampleApp/Sources/Support/SampleAppConfiguration.swift
-  checksum: 8a3355072295910ab8e2e054af5ed02602a28336dc6e5705b17195514f0fcac0
+  checksum: 8f17db0170e8ed9334ba7d43ec1fdb86dc10477d41b022ff07ecf91627748fc6
 version: ""

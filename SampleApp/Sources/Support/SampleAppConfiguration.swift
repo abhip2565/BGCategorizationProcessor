@@ -14,23 +14,153 @@ enum SampleAppConfiguration {
         CategoryDefinition(
             id: "finance",
             label: "Finance",
-            descriptors: ["invoice", "expense report", "tax filing", "budget review"]
+            descriptors: ["invoice", "expense report", "tax filing", "budget review", "accounts payable"]
         ),
         CategoryDefinition(
             id: "support",
             label: "Support",
-            descriptors: ["bug report", "customer issue", "outage update", "ticket escalation"]
+            descriptors: ["bug report", "customer issue", "outage update", "ticket escalation", "helpdesk"]
         ),
         CategoryDefinition(
             id: "travel",
             label: "Travel",
-            descriptors: ["flight booking", "hotel reservation", "itinerary change", "trip approval"]
+            descriptors: ["flight booking", "hotel reservation", "itinerary change", "trip approval", "visa application"]
         ),
         CategoryDefinition(
             id: "legal",
             label: "Legal",
-            descriptors: ["contract review", "compliance notice", "policy update", "nda request"]
-        )
+            descriptors: ["contract review", "compliance notice", "policy update", "nda request", "litigation"]
+        ),
+        CategoryDefinition(
+            id: "engineering",
+            label: "Engineering",
+            descriptors: ["code review", "pull request", "deployment pipeline", "architecture design", "technical debt"]
+        ),
+        CategoryDefinition(
+            id: "marketing",
+            label: "Marketing",
+            descriptors: ["campaign launch", "brand strategy", "content calendar", "social media analytics", "market research"]
+        ),
+        CategoryDefinition(
+            id: "sales",
+            label: "Sales",
+            descriptors: ["lead qualification", "pipeline forecast", "deal closure", "quota attainment", "prospect outreach"]
+        ),
+        CategoryDefinition(
+            id: "hr",
+            label: "Human Resources",
+            descriptors: ["employee onboarding", "performance review", "benefits enrollment", "recruitment pipeline", "workforce planning"]
+        ),
+        CategoryDefinition(
+            id: "product",
+            label: "Product",
+            descriptors: ["feature prioritization", "roadmap planning", "user research", "product requirements", "release notes"]
+        ),
+        CategoryDefinition(
+            id: "design",
+            label: "Design",
+            descriptors: ["wireframe review", "design system", "user interface mockup", "accessibility audit", "visual identity"]
+        ),
+        CategoryDefinition(
+            id: "security",
+            label: "Security",
+            descriptors: ["vulnerability assessment", "penetration testing", "access control review", "incident response", "security audit"]
+        ),
+        CategoryDefinition(
+            id: "operations",
+            label: "Operations",
+            descriptors: ["supply chain management", "inventory optimization", "vendor coordination", "facilities management", "process improvement"]
+        ),
+        CategoryDefinition(
+            id: "data",
+            label: "Data & Analytics",
+            descriptors: ["data pipeline", "dashboard creation", "metrics reporting", "data warehouse", "predictive modeling"]
+        ),
+        CategoryDefinition(
+            id: "infrastructure",
+            label: "Infrastructure",
+            descriptors: ["server provisioning", "network configuration", "cloud migration", "capacity planning", "disaster recovery"]
+        ),
+        CategoryDefinition(
+            id: "compliance",
+            label: "Compliance",
+            descriptors: ["regulatory filing", "audit preparation", "policy enforcement", "risk assessment", "certification renewal"]
+        ),
+        CategoryDefinition(
+            id: "procurement",
+            label: "Procurement",
+            descriptors: ["purchase order", "vendor evaluation", "contract negotiation", "spend analysis", "supplier onboarding"]
+        ),
+        CategoryDefinition(
+            id: "customer_success",
+            label: "Customer Success",
+            descriptors: ["account health check", "churn prevention", "renewal management", "customer onboarding", "satisfaction survey"]
+        ),
+        CategoryDefinition(
+            id: "training",
+            label: "Training & Development",
+            descriptors: ["learning module", "certification program", "skill assessment", "workshop facilitation", "knowledge base"]
+        ),
+        CategoryDefinition(
+            id: "research",
+            label: "Research",
+            descriptors: ["literature review", "experiment design", "hypothesis testing", "peer review", "publication submission"]
+        ),
+        CategoryDefinition(
+            id: "communications",
+            label: "Communications",
+            descriptors: ["press release", "internal memo", "stakeholder update", "crisis communication", "newsletter draft"]
+        ),
+        CategoryDefinition(
+            id: "project_management",
+            label: "Project Management",
+            descriptors: ["sprint planning", "milestone tracking", "resource allocation", "risk mitigation", "status report"]
+        ),
+        CategoryDefinition(
+            id: "quality_assurance",
+            label: "Quality Assurance",
+            descriptors: ["test plan", "regression testing", "bug triage", "acceptance criteria", "test automation"]
+        ),
+        CategoryDefinition(
+            id: "partnerships",
+            label: "Partnerships",
+            descriptors: ["partner onboarding", "co-marketing agreement", "integration planning", "revenue sharing", "joint venture"]
+        ),
+        CategoryDefinition(
+            id: "real_estate",
+            label: "Real Estate",
+            descriptors: ["lease agreement", "office relocation", "space planning", "property valuation", "tenant improvement"]
+        ),
+        CategoryDefinition(
+            id: "healthcare",
+            label: "Healthcare",
+            descriptors: ["patient intake", "medical records", "insurance claim", "treatment protocol", "clinical trial"]
+        ),
+        CategoryDefinition(
+            id: "logistics",
+            label: "Logistics",
+            descriptors: ["shipment tracking", "warehouse management", "freight forwarding", "customs clearance", "route optimization"]
+        ),
+        CategoryDefinition(
+            id: "sustainability",
+            label: "Sustainability",
+            descriptors: ["carbon footprint", "environmental impact", "green procurement", "waste reduction", "renewable energy"]
+        ),
+        CategoryDefinition(
+            id: "investor_relations",
+            label: "Investor Relations",
+            descriptors: ["earnings call", "shareholder communication", "SEC filing", "analyst briefing", "annual report"]
+        ),
+        CategoryDefinition(
+            id: "customer_feedback",
+            label: "Customer Feedback",
+            descriptors: ["product review", "feature request", "complaint resolution", "NPS survey", "user interview"]
+        ),
+        CategoryDefinition(
+            id: "risk_management",
+            label: "Risk Management",
+            descriptors: ["risk register", "business continuity", "insurance coverage", "threat assessment", "mitigation strategy"]
+        ),
     ]
 
     static let sampleTexts: [String] = [
@@ -81,12 +211,52 @@ enum SampleAppConfiguration {
             "The litigation management team has prepared a comprehensive risk assessment of the pending class action lawsuit alleging systematic violations of the telephone consumer protection act through the company's automated marketing communication system. Analysis of the call records and consent documentation suggests that approximately fourteen thousand contacts may have been made to numbers on the internal do-not-call list due to a synchronization failure between the marketing automation platform and the compliance database that persisted for a period of eleven weeks before detection. The estimated exposure range accounting for statutory damages, potential trebling, and class counsel fees has been communicated to the audit committee, and the company's directors and officers insurance carrier has been notified under the relevant policy provisions.",
         ]
 
-        let allParagraphSets = [financeParagraphs, supportParagraphs, travelParagraphs, legalParagraphs]
+        let engineeringParagraphs: [String] = [
+            "The platform engineering team has completed the initial rollout of the new continuous integration pipeline, migrating twelve microservices from the legacy Jenkins-based build system to the containerized GitHub Actions workflow. Build times have decreased by an average of forty-three percent due to improved layer caching and parallelized test execution across ephemeral runners. The architecture review board has approved the proposed migration from the monolithic API gateway to an envoy-based service mesh that would provide native support for circuit breaking, retry budgets, and distributed rate limiting without requiring application-level changes. The technical debt backlog has been prioritized using a cost-of-delay model that weights each item by its impact on developer productivity and deployment frequency.",
+            "Code review throughput has become a bottleneck as the engineering organization scales beyond one hundred active contributors. The developer experience team has introduced automated pre-review checks that validate code style compliance, test coverage thresholds, and dependency license compatibility before a pull request enters the human review queue. Architecture decision records are now required for any change that modifies public API contracts, introduces new infrastructure dependencies, or alters data retention semantics. The observability team has instrumented the deployment pipeline to capture lead time, change failure rate, and mean time to recovery metrics aligned with the DORA framework for measuring software delivery performance.",
+            "The database migration from PostgreSQL twelve to sixteen has been staged across three phases to minimize risk to the production workload. Phase one completed successfully with the schema-compatible upgrades and extension version bumps applied to the staging cluster. Phase two involves enabling the new query planner optimizations and parallel index creation features that are expected to reduce the nightly analytics job duration from ninety minutes to under thirty. The backend team has refactored the connection pooling layer to support the new authentication protocol required by the upgraded server, and load testing confirms that connection establishment latency remains within the established service level objective of fifty milliseconds at the ninety-ninth percentile.",
+        ]
+
+        let marketingParagraphs: [String] = [
+            "The Q3 integrated marketing campaign has entered its execution phase with coordinated launches across paid search, programmatic display, social media, and email channels. The creative team has produced forty-seven unique ad variations optimized for different audience segments identified through the customer data platform's lookalike modeling capabilities. Attribution modeling has been updated to use a data-driven multi-touch approach that replaces the previous last-click model, providing more accurate visibility into the contribution of upper-funnel awareness channels to pipeline generation. The content marketing team has published a twelve-part thought leadership series that has generated over eight thousand organic backlinks and positioned the company as a category leader in three independent analyst reports.",
+            "Brand perception tracking indicates a twelve-point improvement in unaided awareness among the target enterprise buyer persona following the rebranding initiative completed last quarter. The social media team has scaled its presence to seven platforms with dedicated content strategies for each, resulting in a combined follower growth rate of eighteen percent month over month. Influencer partnership agreements have been restructured to include performance-based compensation tiers tied to verified engagement metrics rather than flat-fee arrangements. The marketing operations team has completed the integration between the marketing automation platform and the CRM system, enabling closed-loop reporting that connects campaign touchpoints to revenue outcomes at the individual opportunity level.",
+            "The product marketing team is preparing the go-to-market strategy for the upcoming platform release, which includes a new pricing tier designed to capture the mid-market segment that has been underserved by the current enterprise-focused packaging. Competitive battlecards have been updated to reflect three recent market entrants whose messaging directly targets the company's installed base with migration incentives. The demand generation team has negotiated sponsorship packages at four major industry conferences scheduled over the next two quarters, including keynote speaking slots and dedicated demo stations that will showcase the new collaborative workflow features targeted at cross-functional buying committees.",
+        ]
+
+        let hrParagraphs: [String] = [
+            "The annual employee engagement survey results have been compiled and distributed to department heads for action planning. Overall engagement scores improved by four points compared to the previous year, with notable gains in the categories of career development opportunity and manager effectiveness. However, the compensation competitiveness dimension declined by seven points, prompting the total rewards team to commission an external market benchmarking study covering base salary, variable compensation, equity grants, and benefits valuation across peer companies in the technology sector. The talent acquisition team has reduced average time-to-fill for engineering roles from sixty-two days to thirty-eight days through the implementation of structured interview scorecards and same-day debriefing protocols.",
+            "The learning and development team has launched a new management training program designed to address the feedback themes identified in the most recent three-sixty review cycle. The program consists of twelve modules delivered over six months covering topics including giving effective feedback, managing remote and hybrid teams, inclusive leadership practices, and navigating difficult conversations about performance and career trajectory. Participation is mandatory for all people managers and completion rates are tracked as part of the management effectiveness scorecard that influences annual performance ratings. The diversity equity and inclusion team has partnered with external facilitators to deliver unconscious bias training tailored to hiring and promotion decision-making contexts.",
+            "The workforce planning model has been updated to reflect the company's strategic growth targets for the next three fiscal years, identifying critical capability gaps in machine learning engineering, cloud security architecture, and enterprise sales leadership. The succession planning process for senior leadership positions has been formalized with the identification of at least two ready-now candidates and two development candidates for each role at the vice president level and above. The employee relations team has implemented a new case management system that centralizes documentation of workplace investigations, accommodation requests, and performance improvement plans with automated escalation triggers and compliance reporting dashboards.",
+        ]
+
+        let securityParagraphs: [String] = [
+            "The quarterly vulnerability assessment has been completed across all production-facing systems, identifying two hundred and seventeen findings of which fourteen are classified as critical severity based on their potential for remote code execution or unauthorized data access. The application security team has prioritized remediation based on a risk scoring model that considers exploit availability, asset criticality, and compensating control effectiveness. The most urgent finding involves a server-side request forgery vulnerability in the document preview service that could allow an authenticated user to access internal metadata endpoints and potentially pivot to the cloud provider's instance credential service. A patch has been developed and is undergoing security regression testing before deployment.",
+            "The security operations center has detected an anomalous pattern of API authentication attempts originating from a distributed set of residential proxy IP addresses, consistent with a credential stuffing campaign targeting enterprise customer accounts. Rate limiting and progressive challenge escalation have been activated, and affected customers have been notified through the established security advisory channel. The threat intelligence team has correlated the attack indicators with a known threat actor group that has been observed targeting SaaS platforms in the same vertical over the past six months. The identity and access management team is accelerating the rollout of mandatory multi-factor authentication for all API access patterns that currently rely solely on long-lived bearer tokens.",
+            "The annual penetration testing engagement has concluded with the external security firm delivering their findings report covering network infrastructure, web applications, mobile applications, and social engineering attack vectors. The most significant finding involved a chain of three individually low-severity issues that when combined allowed the testers to escalate from an unauthenticated external position to internal network access with domain administrator privileges within four hours. The remediation plan addresses each link in the attack chain independently while also recommending defense-in-depth improvements to the network segmentation architecture that would limit the blast radius of similar composite attacks in the future.",
+        ]
+
+        let dataParagraphs: [String] = [
+            "The data engineering team has completed the migration of the core analytics pipeline from the legacy batch-processing architecture to a streaming-first design built on Apache Kafka and Apache Flink. The new pipeline processes an average of three point two million events per minute with end-to-end latency under ninety seconds, compared to the previous six-hour batch window. Data quality monitoring has been integrated at every stage of the pipeline using automated expectation checks that validate schema conformance, referential integrity, and statistical distribution properties. The data governance committee has approved a new data classification framework with four sensitivity tiers that determines encryption requirements, access control policies, and retention periods for each dataset in the warehouse.",
+            "The business intelligence team has launched a self-service analytics platform that enables non-technical stakeholders to create and share interactive dashboards without requiring SQL knowledge or data engineering support. The platform includes a curated semantic layer that maps business terminology to the underlying data model, ensuring consistent metric definitions across all reports and eliminating the conflicting numbers problem that had eroded trust in data-driven decision making. The machine learning engineering team has operationalized fourteen predictive models into the production inference pipeline, with automated retraining triggered by data drift detection algorithms that monitor input feature distributions against the training baseline.",
+            "The data warehouse optimization project has achieved a forty-seven percent reduction in compute costs through the implementation of incremental materialization, partition pruning, and query result caching across the most frequently accessed datasets. The analytics engineering team has adopted a modular transformation framework that separates staging, intermediate, and mart layers with explicit contracts and automated testing at each boundary. Cross-functional data product teams have been established for the three highest-priority domains with dedicated data engineers, analysts, and product managers who own the end-to-end lifecycle from ingestion through consumption and are accountable for data freshness, accuracy, and accessibility service level agreements.",
+        ]
+
+        let logisticsParagraphs: [String] = [
+            "The supply chain visibility platform has been upgraded to provide real-time tracking across all transportation modes including ocean freight, air cargo, rail, and last-mile delivery. The new system integrates telemetry data from IoT sensors attached to shipping containers that monitor location, temperature, humidity, and shock events throughout the transit lifecycle. The logistics optimization engine has been retrained on eighteen months of historical shipment data and now generates routing recommendations that account for carrier reliability scores, port congestion forecasts, and dynamic fuel surcharge calculations. Average transit time from manufacturing facility to regional distribution center has decreased by three point eight days since the platform deployment.",
+            "Warehouse management system enhancements have been deployed across all twelve distribution centers, introducing wave-less picking algorithms that dynamically prioritize order fulfillment based on carrier pickup schedules, customer service level commitments, and inventory location proximity. The returns processing workflow has been redesigned to reduce average disposition time from fourteen days to three days through automated inspection protocols and machine-learning-based condition grading that determines whether returned items should be restocked, refurbished, or liquidated. The freight audit and payment system has flagged over two hundred thousand dollars in carrier billing discrepancies during the past quarter, with the majority attributed to incorrect accessorial charges and weight-based rating errors.",
+            "The customs compliance team has implemented an automated trade classification system that assigns harmonized tariff codes to products using natural language processing models trained on historical classification rulings and product description databases. The system achieves ninety-two percent accuracy on first-pass classification, reducing the time required for customs documentation preparation from an average of four hours per shipment to under thirty minutes. Cross-border trade agreements have been renegotiated with three key trading partners to take advantage of preferential duty rates available under recently enacted free trade provisions, resulting in an estimated annual savings of one point four million dollars in import duties across the affected product categories.",
+        ]
+
+        let allParagraphSets = [
+            financeParagraphs, supportParagraphs, travelParagraphs, legalParagraphs,
+            engineeringParagraphs, marketingParagraphs, hrParagraphs, securityParagraphs,
+            dataParagraphs, logisticsParagraphs
+        ]
 
         return (0..<500).map { index in
             let paragraphs = allParagraphSets[index % allParagraphSets.count]
             // Cycle through paragraphs repeatedly until we exceed 20,000 characters
-            var text = "[\(index + 1)/100] "
+            var text = "[\(index + 1)/500] "
             var paragraphIndex = 0
             while text.count < 20_000 {
                 text += paragraphs[paragraphIndex % paragraphs.count]

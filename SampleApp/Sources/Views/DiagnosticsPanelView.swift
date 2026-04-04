@@ -8,6 +8,7 @@ struct DiagnosticsPanelView: View {
             VStack(alignment: .leading, spacing: 20) {
                 statusGrid
                 actionCard
+                stressTestCard
                 recentResultsCard
                 validationCard
             }
@@ -39,7 +40,7 @@ struct DiagnosticsPanelView: View {
             }
         }
         .padding(20)
-        .background(cardBackground)
+        .background(cardShape)
     }
 
     private var actionCard: some View {
@@ -91,7 +92,79 @@ struct DiagnosticsPanelView: View {
                 .textSelection(.enabled)
         }
         .padding(20)
-        .background(cardBackground)
+        .background(cardShape)
+    }
+
+    private var stressTestCard: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text("Stress test")
+                .font(.system(size: 22, weight: .bold, design: .rounded))
+
+            Text("Enqueue and process 500 large-text jobs in one shot to exercise background throughput.")
+                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .foregroundStyle(.secondary)
+
+            actionButton(
+                title: model.isRunningStressTest ? "Enqueuing..." : "Queue 500 jobs for BG processing",
+                tint: Color(red: 0.74, green: 0.30, blue: 0.18),
+                isDisabled: model.isRunningStressTest
+            ) {
+                Task {
+                    await model.enqueueStressTestForBackground()
+                }
+            }
+
+            actionButton(
+                title: model.isRunningStressTest ? "Running..." : "Run 500-job stress test (foreground)",
+                tint: Color(red: 0.56, green: 0.22, blue: 0.52),
+                isDisabled: model.isRunningStressTest
+            ) {
+                Task {
+                    await model.runStressTest()
+                }
+            }
+
+            if !model.stressTestProgress.isEmpty {
+                Text(model.stressTestProgress)
+                    .font(.system(size: 14, weight: .bold, design: .monospaced))
+                    .foregroundStyle(model.isRunningStressTest ? .orange : .green)
+            }
+
+            if !model.stressTestResults.isEmpty {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 8) {
+                        ForEach(model.stressTestResults, id: \.itemID) { result in
+                            HStack(spacing: 10) {
+                                Text(result.topCategory ?? "---")
+                                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                                    .frame(width: 80, alignment: .leading)
+
+                                Text(result.itemID.components(separatedBy: "-").last.map { "#\($0)" } ?? result.itemID)
+                                    .font(.system(size: 13, weight: .medium, design: .monospaced))
+                                    .foregroundStyle(.secondary)
+
+                                Spacer()
+
+                                if let top = result.topCategory, let score = result.categoryScores[top] {
+                                    Text(String(format: "%.2f", score))
+                                        .font(.system(size: 13, weight: .bold, design: .monospaced))
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(.ultraThinMaterial)
+                            )
+                        }
+                    }
+                }
+                .frame(maxHeight: 400)
+            }
+        }
+        .padding(20)
+        .background(cardShape)
     }
 
     private var recentResultsCard: some View {
@@ -117,14 +190,14 @@ struct DiagnosticsPanelView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(14)
                     .background(
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .fill(Color.white.opacity(0.7))
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .fill(.ultraThinMaterial)
                     )
                 }
             }
         }
         .padding(20)
-        .background(cardBackground)
+        .background(cardShape)
     }
 
     private var validationCard: some View {
@@ -143,7 +216,7 @@ struct DiagnosticsPanelView: View {
             }
         }
         .padding(20)
-        .background(cardBackground)
+        .background(cardShape)
     }
 
     private func statusTile(title: String, value: String) -> some View {
@@ -158,8 +231,8 @@ struct DiagnosticsPanelView: View {
         }
         .padding(14)
         .background(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(Color.white.opacity(0.72))
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .fill(.ultraThinMaterial)
         )
     }
 
@@ -180,7 +253,9 @@ struct DiagnosticsPanelView: View {
         .disabled(isDisabled)
     }
 
-    private var cardBackground: some ShapeStyle {
-        Color.white.opacity(0.56)
+    private var cardShape: some View {
+        RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .fill(.regularMaterial)
+            .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
     }
 }

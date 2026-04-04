@@ -25,6 +25,9 @@ final class SampleAppModel: ObservableObject {
     @Published private(set) var isClassifying = false
     @Published private(set) var isRefreshing = false
     @Published private(set) var isQueueingBackgroundSamples = false
+    @Published private(set) var isRunningStressTest = false
+    @Published private(set) var stressTestProgress: String = ""
+    @Published private(set) var stressTestResults: [CategorizationResult] = []
     @Published private(set) var lifecycleStateDescription = "Launching"
     @Published private(set) var backgroundRefreshDescription = "Unknown"
     @Published private(set) var backgroundTaskReadinessDescription = "Checking configuration"
@@ -282,6 +285,86 @@ final class SampleAppModel: ObservableObject {
         }
     }
 
+    func enqueueStressTestForBackground() async {
+        guard let processor else {
+            statusMessage = "Processor is not ready yet."
+            return
+        }
+
+        isRunningStressTest = true
+        stressTestResults = []
+        stressTestProgress = "Enqueuing 500 large jobs..."
+        lastErrorMessage = nil
+
+        let texts = SampleAppConfiguration.stressTestTexts
+        let prefix = "stress-\(Int(Date().timeIntervalSince1970))"
+
+        do {
+            let batch = texts.enumerated().map { index, text in
+                (text, "\(prefix)-\(index)")
+            }
+            try await processor.enqueue(batch: batch, priority: .normal)
+            stressTestProgress = "Queued 500 jobs. Minimize app, then trigger BG task from debugger."
+            statusMessage = "500 jobs queued for background processing. Minimize now."
+            await refreshSnapshot()
+        } catch {
+            lastErrorMessage = Self.describe(error)
+            stressTestProgress = "Failed to enqueue"
+            statusMessage = "Stress test enqueue failed."
+        }
+
+        isRunningStressTest = false
+    }
+
+    func runStressTest() async {
+        guard let processor else {
+            statusMessage = "Processor is not ready yet."
+            return
+        }
+
+        isRunningStressTest = true
+        stressTestResults = []
+        stressTestProgress = "Enqueuing 500 jobs..."
+        lastErrorMessage = nil
+
+        let texts = SampleAppConfiguration.stressTestTexts
+        let prefix = "stress-\(Int(Date().timeIntervalSince1970))"
+
+        do {
+            let batch = texts.enumerated().map { index, text in
+                (text, "\(prefix)-\(index)")
+            }
+            try await processor.enqueue(batch: batch, priority: .normal)
+            stressTestProgress = "Enqueued 500. Processing..."
+
+            let startTime = CFAbsoluteTimeGetCurrent()
+            while try await processor.pendingCount() > 0 {
+                _ = try await processor.processAvailableJobs(mode: .foreground)
+                let remaining = try await processor.pendingCount()
+                let done = 500 - remaining
+                stressTestProgress = "Processed \(done)/500..."
+            }
+            let elapsed = CFAbsoluteTimeGetCurrent() - startTime
+
+            var results: [CategorizationResult] = []
+            for i in 0..<500 {
+                if let result = try await processor.result(for: "\(prefix)-\(i)") {
+                    results.append(result)
+                }
+            }
+            stressTestResults = results.sorted { $0.processedAt < $1.processedAt }
+            stressTestProgress = "Done: 500 jobs in \(String(format: "%.1f", elapsed))s"
+            statusMessage = "Stress test complete. \(results.count) results collected."
+            await refreshSnapshot()
+        } catch {
+            lastErrorMessage = Self.describe(error)
+            stressTestProgress = "Failed"
+            statusMessage = "Stress test failed."
+        }
+
+        isRunningStressTest = false
+    }
+
     func loadSampleText(_ text: String) {
         inputText = text
         statusMessage = "Loaded sample text. Tap Classify when ready."
@@ -325,6 +408,13 @@ final class SampleAppModel: ObservableObject {
             lastErrorMessage = Self.describe(error)
             statusMessage = "Unable to refresh the sample app state."
         }
+    }
+
+    var shortStatusMessage: String {
+        if statusMessage.contains(configuration.databasePath) {
+            return statusMessage.replacingOccurrences(of: configuration.databasePath, with: ".../<db>.sqlite3")
+        }
+        return statusMessage
     }
 
     var confidenceThresholdText: String {

@@ -13,10 +13,10 @@ struct CategoryManagerView: View {
             Section {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Persisted category catalog")
-                        .font(.system(size: 24, weight: .bold, design: .serif))
+                        .font(.system(size: 22, weight: .bold, design: .serif))
 
                     Text("Categories are stored by the library and survive relaunch or app kill until you change them.")
-                        .font(.system(size: 15, weight: .medium, design: .rounded))
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 .padding(.vertical, 8)
@@ -26,9 +26,13 @@ struct CategoryManagerView: View {
             if model.categories.isEmpty {
                 Section {
                     Text("No categories yet. Add one manually or seed the starter set.")
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .font(.system(size: 15, weight: .medium, design: .rounded))
                         .foregroundStyle(.secondary)
                 }
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(.regularMaterial)
+                )
             } else {
                 Section("Categories") {
                     ForEach(model.categories, id: \.id) { category in
@@ -36,9 +40,9 @@ struct CategoryManagerView: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(category.label)
-                                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                                        .font(.system(size: 17, weight: .bold, design: .rounded))
                                     Text(category.id)
-                                        .font(.system(size: 13, weight: .medium, design: .monospaced))
+                                        .font(.system(size: 12, weight: .medium, design: .monospaced))
                                         .foregroundStyle(.secondary)
                                 }
 
@@ -50,13 +54,14 @@ struct CategoryManagerView: View {
                                     isPresentingEditor = true
                                 } label: {
                                     Image(systemName: "pencil")
+                                        .foregroundStyle(Color(red: 0.78, green: 0.36, blue: 0.23))
                                 }
                                 .buttonStyle(.borderless)
                             }
 
                             if category.descriptors.isEmpty {
                                 Text("No descriptors. The label embedding is used as the centroid.")
-                                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                                    .font(.system(size: 13, weight: .medium, design: .rounded))
                                     .foregroundStyle(.secondary)
                             } else {
                                 descriptorFlow(category.descriptors)
@@ -83,6 +88,10 @@ struct CategoryManagerView: View {
                         }
                     }
                 }
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(.regularMaterial)
+                )
             }
         }
         .listStyle(.insetGrouped)
@@ -134,15 +143,19 @@ struct CategoryManagerView: View {
     }
 
     private func descriptorFlow(_ descriptors: [String]) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 6) {
             ForEach(descriptors, id: \.self) { descriptor in
                 Text(descriptor)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .padding(.horizontal, 10)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 6)
                     .background(
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .fill(Color(red: 0.93, green: 0.97, blue: 0.95))
+                        Capsule()
+                            .fill(Color(red: 0.78, green: 0.36, blue: 0.23).opacity(0.12))
+                    )
+                    .overlay(
+                        Capsule()
+                            .stroke(Color(red: 0.78, green: 0.36, blue: 0.23).opacity(0.2), lineWidth: 1)
                     )
             }
         }

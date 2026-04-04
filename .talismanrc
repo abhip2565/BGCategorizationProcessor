@@ -14,11 +14,15 @@ fileignoreconfig:
 - filename: SampleApp/BGCategorizationProcessorSampleApp.xcodeproj/project.pbxproj
   checksum: 0b35ad545fb3c5c77c6dc77b3636dac042237896e9818cff09c40689c877c25a
 - filename: SampleApp/BGCategorizationProcessorSampleApp.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
-  checksum: caef3939348023be02171c6e016eed0a4a82b14a08a40c6f66f95d3413d3dca3
+  checksum: b5de17a9ca98f45f8caf8daebbc32d0d1e3024b881c0a773557bda1f843c27ea
 - filename: SampleApp/BGCategorizationProcessorSampleApp.xcodeproj/xcshareddata/xcschemes/SampleApp.xcscheme
   checksum: a0cfcb7ae33d855c1726469c60f581210d88d5019a02672f70927e8625d411b5
 - filename: SampleApp/Config/Info.plist
-  checksum: 013f159fe77258865077fe56a98ea74a8e564cd7b9109e976fcc7738cf75d26e
+  checksum: 577435041acea916183eb5dd6e7ace539a83a851c7932198a1f829fc6b8f3eba
 - filename: SampleApp/Sources/App/SampleAppModel.swift
   checksum: 17afb9bd86f34412d8a9dd556e3d4e44bd6ce4c39d22ff334994fbd626a724ae
+- filename: Sources/BGCategorizationProcessor/BGTaskCoordinator.swift
+  checksum: 45c3f4187ca25ef14d81e97ec67911278c06dee438cb1e1abbf28f4bf146ad1f
+- filename: SampleApp/Sources/Support/SampleAppConfiguration.swift
+  checksum: 8a3355072295910ab8e2e054af5ed02602a28336dc6e5705b17195514f0fcac0
 version: ""

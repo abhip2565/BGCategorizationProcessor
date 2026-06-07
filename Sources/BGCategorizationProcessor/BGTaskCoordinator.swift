@@ -2,7 +2,7 @@ import Foundation
 import os.log
 
 #if os(iOS)
-import BackgroundTasks
+@preconcurrency import BackgroundTasks
 #endif
 
 private let logger = Logger(subsystem: "BGCategorizationProcessor", category: "BGTaskCoordinator")
